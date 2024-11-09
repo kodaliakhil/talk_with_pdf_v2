@@ -3,6 +3,7 @@ import { Progress } from "@/components/ui/progress";
 import { Layout, Shield } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import UploadPdfDialog from "./UploadPdfDialog";
 
 const SideBar = () => {
   return (
@@ -15,7 +16,9 @@ const SideBar = () => {
       </div>
 
       <div className="mt-10">
-        <Button className="w-full">+ Upload PDF</Button>
+        <UploadPdfDialog>
+          <Button className="w-full">+ Upload PDF</Button>
+        </UploadPdfDialog>
         <div className="flex gap-2 items-center p-3 mt-5 hover:bg-slate-100 rounded-lg cursor-pointer">
           <Layout />
           <h2>Workspace</h2>
@@ -28,7 +31,9 @@ const SideBar = () => {
       <div className="absolute bottom-24 w-[80%]">
         <Progress value={33} />
         <p className="text-sm mt-1">2 out of 5 PDFs uploaded</p>
-        <p className="text-sm text-gray-400 mt-2">Upgrade to upload more PDFs</p>
+        <p className="text-sm text-gray-400 mt-2">
+          Upgrade to upload more PDFs
+        </p>
       </div>
     </div>
   );
