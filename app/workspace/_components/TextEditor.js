@@ -10,6 +10,7 @@ const TextEditor = () => {
 
     
     content: "",
+    immediatelyRender: false,
     editorProps: {
       attributes: {
         class:

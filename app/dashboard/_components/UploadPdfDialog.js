@@ -55,7 +55,7 @@ const UploadPdfDialog = ({ children }) => {
       fileUrl,
       createdBy: user?.primaryEmailAddress?.emailAddress,
     });
-    // console.log(resp);
+    
 
     // API call to fetch PDF process data
     const apiResponse = await axios.get("/api/pdf-loader?pdfUrl=" + fileUrl);
