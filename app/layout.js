@@ -2,7 +2,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Outfit } from "next/font/google";
 import Provider from "./provider";
-import { ClerkProvider } from "@clerk/nextjs";
+// import { ClerkProvider } from "@clerk/nextjs";
+import dynamic from "next/dynamic";
+import ClerkProviderWrapper from "@/components/ClerkProviderWrapper";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,14 +16,18 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
+// Dynamically import ClerkProvider to prevent SSR mismatch
+// const ClerkProvider = dynamic(() => import("@clerk/nextjs").then(mod => mod.ClerkProvider), { ssr: false });
+
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={outfit.className}>
+    <html lang="en">
+      <body className={outfit.className}>
+        <ClerkProviderWrapper>
           <Provider>{children}</Provider>
-        </body>
-      </html>
-    </ClerkProvider>
+          <Toaster />
+        </ClerkProviderWrapper>
+      </body>
+    </html>
   );
 }

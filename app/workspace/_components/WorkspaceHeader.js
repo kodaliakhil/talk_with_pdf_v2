@@ -2,7 +2,7 @@ import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import React from "react";
 
-const WorkspaceHeader = () => {
+const WorkspaceHeader = ({ fileName}) => {
   return (
     <div className="flex p-4 justify-between shadow-md">
       <div className="flex">
@@ -10,6 +10,7 @@ const WorkspaceHeader = () => {
         <Image src={"/logo.svg"} alt="AI PDF logo" width={30} height={30} />
         <h1 className="text-3xl"> PDF</h1>
       </div>
+      <h2 className="font-bold">{fileName}</h2>
       <UserButton />
     </div>
   );

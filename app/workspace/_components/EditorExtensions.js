@@ -3,6 +3,7 @@ import { api } from "@/convex/_generated/api";
 import { useAction } from "convex/react";
 import { Bold, ItalicIcon, Sparkles, UnderlineIcon } from "lucide-react";
 import { useParams } from "next/navigation";
+import { toast } from "sonner"
 import React from "react";
 
 const EditorExtensions = ({ editor }) => {
@@ -10,6 +11,7 @@ const EditorExtensions = ({ editor }) => {
 
   const SearchAI = useAction(api.myActions.search);
   const onAiClick = async () => {
+    toast("AI is thinking...");
     const selectedText = editor.state.doc.textBetween(
       editor.state.selection.from,
       editor.state.selection.to,

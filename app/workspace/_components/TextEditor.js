@@ -6,22 +6,23 @@ import EditorExtensions from "./EditorExtensions";
 
 const TextEditor = () => {
   const editor = useEditor({
-    extensions: [StarterKit,Placeholder.configure({ placeholder: "Type something..." })],
+    extensions: [
+      StarterKit,
+      Placeholder.configure({ placeholder: "Type something..." }),
+    ],
 
-    
     content: "",
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class:
-          "h-screen p-5 focus:outline-none",
+        class: "h-screen p-5 focus:outline-none",
       },
-    }
+    },
   });
   return (
     <div>
-       <EditorExtensions editor={editor}/>
-      <div>
+      <EditorExtensions editor={editor} />
+      <div className="overflow-scroll h-[88vh]">
         <EditorContent editor={editor} />
       </div>
     </div>
