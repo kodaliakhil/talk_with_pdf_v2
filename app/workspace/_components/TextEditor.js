@@ -1,10 +1,14 @@
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React from "react";
+import React, { useEffect } from "react";
 import EditorExtensions from "./EditorExtensions";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
-const TextEditor = () => {
+const TextEditor = ({ fileId }) => {
+  const notes = useQuery(api.notes.GetNotes, { fileId: fileId });
+  console.log(notes);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -19,6 +23,11 @@ const TextEditor = () => {
       },
     },
   });
+
+  useEffect(() => {
+    editor && editor.commands.setContent(notes);
+  }, [editor && notes]);
+
   return (
     <div>
       <EditorExtensions editor={editor} />

@@ -1,15 +1,17 @@
 import { chatSession } from "@/configs/AIModel";
 import { api } from "@/convex/_generated/api";
-import { useAction } from "convex/react";
+import { useAction, useMutation } from "convex/react";
 import { Bold, ItalicIcon, Sparkles, UnderlineIcon } from "lucide-react";
 import { useParams } from "next/navigation";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import React from "react";
+import { useUser } from "@clerk/nextjs";
 
 const EditorExtensions = ({ editor }) => {
   const { fileId } = useParams();
-
   const SearchAI = useAction(api.myActions.search);
+  const saveNotes = useMutation(api.notes.AddNotes);
+  const { user } = useUser();
   const onAiClick = async () => {
     toast("AI is thinking...");
     const selectedText = editor.state.doc.textBetween(
@@ -37,6 +39,11 @@ const EditorExtensions = ({ editor }) => {
     editor.commands.setContent(
       AllText + "<p> <strong>Answer: </strong>" + finalAns + " </p>"
     );
+    saveNotes({
+      notes: editor.getHTML(),
+      fileId: fileId,
+      createdBy: user?.primaryEmailAddress?.emailAddress,
+    });
   };
   return (
     editor && (
