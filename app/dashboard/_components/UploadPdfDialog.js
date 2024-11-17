@@ -18,6 +18,7 @@ import { Loader2Icon } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
+import { toast } from "sonner";
 
 const UploadPdfDialog = ({ children }) => {
   const generateUploadUrl = useMutation(api.fileStorage.generateUploadUrl);
@@ -66,6 +67,7 @@ const UploadPdfDialog = ({ children }) => {
     });
     setLoading(false);
     setOpen(false);
+    toast.success("File is Ready!");
   };
   return (
     <Dialog open={open}>
